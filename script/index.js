@@ -1,51 +1,41 @@
-// Task #1
-// Реализовать рекурсивную функцию которая находит факториал переданного в нее числа
-// getFactorial(3) // в данном случае должна вернуть факториал числа 3! = 3 * 2 * 1
+// Палиндром можно получить как результат операций над другими числами.
+// Возьмём любое натуральное число и сложим его с обращённым числом, то есть записанным теми же цифрами,
+// но в обратном порядке. Проделаем то же действие с получившейся суммой и будем повторять его до тех пор,
+// пока не образуется палиндром. Иногда достаточно сделать всего один шаг (например, 312 + 213 = 525), но,
+// как правило, требуется не менее двух. Скажем, число 96 порождает палиндром 4884 только на четвёртом шаге....
+// В результате я хочу, чтоб вы написали функцию, которая будет возвращать объект где будет свойство result - и это будет
+// палиндром и свойство steps - это число вызовов до нахождения палиндрома
 
-function getFactorial(num){
+let Number = 96;
+let step = 0;
 
-    if(num === 0 || num === 1){
-        return 1;
+function palindrome(number){
+
+    let ReversedNum = 0;
+
+    const getReversedNum = (number) => {
+        while (number) {
+            ReversedNum = ReversedNum * 10 + number % 10;
+            number = Math.floor(number / 10);
+        }
+
+        return ReversedNum;
+    }
+    getReversedNum(number);
+
+
+    if(Number === ReversedNum){
+        return{
+            number,
+            step
+        }
     }
 
-    return num * getFactorial(num - 1);
-}
+    Number = number + ReversedNum;
+    step += 1;
 
-console.log('Task #1');
-console.log(getFactorial(3));
-
-
-// Task #2
-// Реализовать рекурсивную функцию которая находит возводит число в степень.
-// Число которое нужно возвести в степень передается как первый аргумент в функцию
-// Степень передается как второй аргумент в функцию pow(num, degree)
-
-function pow(num, degree){
-
-    if(degree === 1){
-        return num;
-    }
-
-    return num * pow(num, degree - 1);
-}
-
-console.log('Task #2');
-console.log(pow(3,5));
-
-// Task #3
-// Рекурсивное суммирование
-// Задача: напишите рекурсивную функцию для вычисления суммы заданных положительных целых чисел a и b
-// без прямого использования оператора +.
-
-function sum(a, b){
-
-    if(a === 0){
-        return b;
-    }
-
-    return sum(a - 1,b + 1);
+    return palindrome(Number);
 
 }
 
-console.log('Task #3');
-console.log(sum(3,5));
+console.log(palindrome(Number));
